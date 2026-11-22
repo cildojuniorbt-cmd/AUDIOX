@@ -20,15 +20,26 @@
         "resizable": true
       }
     ],
-    "security": { "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data: blob:; media-src 'self' asset: http://asset.localhost blob:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost https://*.supabase.co https://*.cloudflare.com" }
+    "security": {
+      "csp": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; img-src 'self' asset: http://asset.localhost data: blob:; media-src 'self' asset: http://asset.localhost blob:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost https://unpkg.com https://*.supabase.co https://*.cloudflare.com"
+    }
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "dmg"],
+    "targets": [
+      "nsis",
+      "dmg"
+    ],
     "category": "Music",
     "shortDescription": "Audio and video conversion workspace",
     "longDescription": "AUDIOX by NEXUS: professional audio and video conversion tools.",
-    "windows": { "nsis": { "displayLanguageSelector": false } },
-    "macOS": { "minimumSystemVersion": "11.0" }
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": false
+      }
+    },
+    "macOS": {
+      "minimumSystemVersion": "11.0"
+    }
   }
 }
