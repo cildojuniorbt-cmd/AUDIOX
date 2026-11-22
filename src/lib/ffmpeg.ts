@@ -3,14 +3,22 @@ import { fetchFile, toBlobURL } from '@ffmpeg/util'
 
 let instance: FFmpeg | null = null
 let loading: Promise<FFmpeg> | null = null
+let logSink: ((message: string) => void) | undefined
+let progressSink: ((value: number) => void) | undefined
+let listenersAttached = false
 
 const CORE_BASE = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
 
 export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: (value: number) => void) {
   if (!instance) instance = new FFmpeg()
   const ffmpeg = instance
-  if (onLog) ffmpeg.on('log', ({ message }) => onLog(message))
-  if (onProgress) ffmpeg.on('progress', ({ progress }) => onProgress(Math.max(0, Math.min(1, progress))))
+  logSink = onLog
+  progressSink = onProgress
+  if (!listenersAttached) {
+    ffmpeg.on('log', ({ message }) => logSink?.(message))
+    ffmpeg.on('progress', ({ progress }) => progressSink?.(Math.max(0, Math.min(1, progress))))
+    listenersAttached = true
+  }
   if (!ffmpeg.loaded) {
     if (!loading) {
       loading = (async () => {
