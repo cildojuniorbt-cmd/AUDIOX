@@ -55,7 +55,7 @@ export async function convertMedia(
     const mime = audioFormats.has(format)
       ? ({ mp3:'audio/mpeg', wav:'audio/wav', flac:'audio/flac', m4a:'audio/mp4', aac:'audio/aac', ogg:'audio/ogg', opus:'audio/ogg', aiff:'audio/aiff' } as Record<string,string>)[format] || 'application/octet-stream'
       : ({ mp4:'video/mp4', webm:'video/webm', mov:'video/quicktime', mkv:'video/x-matroska', gif:'image/gif' } as Record<string,string>)[format] || 'application/octet-stream'
-    return { blob: new Blob([data as Uint8Array<ArrayBuffer>], { type: mime }), filename: outputName }
+    return { blob: new Blob([data as unknown as BlobPart], { type: mime }), filename: outputName }
   } finally {
     await ffmpeg.deleteFile(inputName).catch(() => undefined)
     await ffmpeg.deleteFile(outputName).catch(() => undefined)
