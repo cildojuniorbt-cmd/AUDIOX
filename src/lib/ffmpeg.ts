@@ -1,7 +1,5 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg'
-import { fetchFile } from '@ffmpeg/util'
-import coreURL from '@ffmpeg/core/dist/umd/ffmpeg-core.js?url'
-import wasmURL from '@ffmpeg/core/dist/umd/ffmpeg-core.wasm?url'
+import { fetchFile, toBlobURL } from '@ffmpeg/util'
 
 let instance: FFmpeg | null = null
 let loading: Promise<FFmpeg> | null = null
@@ -45,6 +43,8 @@ export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: 
   if (!ffmpeg.loaded) {
     if (!loading) {
       loading = (async () => {
+        const coreURL = await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, 'text/javascript')
+        const wasmURL = await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, 'application/wasm')
         await ffmpeg.load({ coreURL, wasmURL })
         return ffmpeg
       })().catch(error => {
