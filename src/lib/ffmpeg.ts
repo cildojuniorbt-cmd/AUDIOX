@@ -8,6 +8,8 @@ let progressSink: ((value: number) => void) | undefined
 let listenersAttached = false
 let conversionQueue: Promise<unknown> = Promise.resolve()
 
+const CORE_BASE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm'
+
 const AUDIO_FORMATS = new Set(['mp3', 'wav', 'flac', 'm4a', 'aac', 'ogg', 'opus', 'wma', 'aiff', 'alac', 'ape', 'ac3', 'dts', 'amr', 'mp2'])
 const VIDEO_FORMATS = new Set(['mp4', 'mkv', 'mov', 'avi', 'webm', 'wmv', 'flv', 'mpeg', 'mpg', 'm4v', '3gp', 'ts', 'mts', 'm2ts', 'vob', 'ogv', 'mxf', 'asf', 'dv', 'gif'])
 const MIME_TYPES: Record<string, string> = {
