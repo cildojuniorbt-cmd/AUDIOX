@@ -17,6 +17,10 @@ AUDIOX is a cross-platform audio and video workspace with one shared React + Typ
 - Conversion logs and per-file error handling.
 - Tauri desktop shell and platform package workflows.
 
+## Public web version
+
+The production web app is published through GitHub Pages at `https://cildojuniorbt-cmd.github.io/AUDIOX/`. Pushes to `main` trigger the Pages deployment workflow.
+
 ## Development
 ```bash
 npm install
