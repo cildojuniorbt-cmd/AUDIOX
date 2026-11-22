@@ -26,10 +26,10 @@ jobs:
         with:
           node-version: 22
       - uses: dtolnay/rust-toolchain@stable
-      - name: Generate platform icons
-        run: npx tauri icon src-tauri/icons/app.svg
       - name: Install frontend dependencies
         run: npm install
+      - name: Generate platform icons
+        run: npx tauri icon src-tauri/icons/app.svg
       - name: Build desktop package
         run: npm run desktop:build
       - name: Upload installer
