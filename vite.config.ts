@@ -25,7 +25,7 @@ export default defineConfig({
         navigateFallback: 'index.html',
         globPatterns: ['**/*.{js,css,html,svg,woff2}'],
         runtimeCaching: [{
-          urlPattern: /^https:\/\/unpkg\.com\/@ffmpeg\\/core@0\.12\.6\//,
+          urlPattern: 'https://unpkg.com/@ffmpeg/core@0.12.6/',
           handler: 'CacheFirst',
           options: { cacheName: 'audiox-ffmpeg-core', expiration: { maxEntries: 4, maxAgeSeconds: 2592000 }, cacheableResponse: { statuses: [0, 200] } }
         }]
