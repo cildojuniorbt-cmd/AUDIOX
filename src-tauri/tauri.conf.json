@@ -1,0 +1,34 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "AUDIOX",
+  "version": "0.1.0",
+  "identifier": "com.nexusworks.audiox",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "AUDIOX",
+        "width": 1280,
+        "height": 820,
+        "minWidth": 900,
+        "minHeight": 620,
+        "resizable": true
+      }
+    ],
+    "security": { "csp": "default-src 'self'; img-src 'self' asset: http://asset.localhost data: blob:; media-src 'self' asset: http://asset.localhost blob:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost https://*.supabase.co https://*.cloudflare.com" }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis", "dmg"],
+    "category": "Music",
+    "shortDescription": "Audio and video conversion workspace",
+    "longDescription": "AUDIOX by NEXUS: professional audio and video conversion tools.",
+    "windows": { "nsis": { "displayLanguageSelector": false } },
+    "macOS": { "minimumSystemVersion": "11.0" }
+  }
+}
