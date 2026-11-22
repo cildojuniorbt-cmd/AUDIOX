@@ -44,7 +44,7 @@ export async function convertMedia(
   options: { bitrate: string; onProgress: (value: number) => void; onLog: (message: string) => void }
 ) {
   const ffmpeg = await getFFmpeg(options.onLog, options.onProgress)
-  const safeBase = file.name.replace(/\\.[^.]+$/, '').replace(/[^a-zA-Z0-9-_]+/g, '_').slice(0, 70) || 'audiox_media'
+  const safeBase = file.name.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9-_]+/g, '_').slice(0, 70) || 'audiox_media'
   const inputName = `input_${Date.now()}.${file.name.split('.').pop()?.toLowerCase() || 'bin'}`
   const outputName = `${safeBase}_AUDIOX.${format}`
   try {
