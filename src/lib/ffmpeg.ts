@@ -18,6 +18,19 @@ const MIME_TYPES: Record<string, string> = {
   mkv: 'video/x-matroska', gif: 'image/gif'
 }
 
+export async function inspectEncoders(onLog?: (message: string) => void): Promise<string[]> {
+  const ffmpeg = await getFFmpeg(onLog, undefined)
+  const lines: string[] = []
+  const previousSink = logSink
+  logSink = message => { lines.push(message); onLog?.(message) }
+  try {
+    await ffmpeg.exec(['-hide_banner', '-encoders'])
+    return lines.filter(line => /^\s*[VAS\.][A-Z\.]{5}\s+/.test(line)).map(line => line.trim())
+  } finally {
+    logSink = previousSink
+  }
+}
+
 export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: (value: number) => void) {
   if (!instance) instance = new FFmpeg()
   const ffmpeg = instance
