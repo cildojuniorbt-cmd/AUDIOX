@@ -1,13 +1,21 @@
 # AUDIOX
 
-**A NEXUS Product** · Download • Convert • Manage
+**A NEXUS Product** · Convert • Extract • Manage
 
-A responsive, installable audio workspace for converting user-owned or authorized audio files.
+AUDIOX is a cross-platform audio and video workspace with one shared React + TypeScript frontend.
 
-## Stack
-- React + TypeScript + Vite
-- FFmpeg.wasm for local browser conversion
-- PWA-ready architecture
+## Delivery platforms
+- Browser: responsive web application with installable PWA support.
+- Windows: Tauri 2 desktop application, packaged as an NSIS `.exe`.
+- macOS: Tauri 2 desktop application, packaged as a `.dmg`.
+
+## Current implementation
+- Local browser conversion powered by FFmpeg.wasm.
+- Multi-file queue with per-file progress, status and individual output downloads.
+- Audio extraction from video by selecting an audio output format.
+- Audio and video output format selectors.
+- Conversion logs and per-file error handling.
+- Tauri desktop shell and platform package workflows.
 
 ## Development
 ```bash
@@ -15,32 +23,33 @@ npm install
 npm run dev
 ```
 
-## Build
+## Web production build
 ```bash
 npm run build
 ```
 
-The downloader module will only integrate sources and workflows that explicitly permit downloading. This starter does not bypass platform restrictions or extract protected streams. Converting lossy audio to WAV does not restore information lost in the original encoding.
+## Desktop development and packaging
+```bash
+npm run desktop:dev
+npm run desktop:build
+```
 
+Desktop packages must be built on their target operating systems. The GitHub Actions workflow can build Windows and macOS artifacts manually or when a version tag beginning with `v` is pushed. Signing and macOS notarization are separate release requirements.
 
-## Audio and video format strategy
+## Media compatibility
+The interface offers a broad selection of audio and video containers. Actual conversion depends on the codecs, demuxers and muxers compiled into the FFmpeg build. MP4, for example, is a container and may contain H.264, HEVC or AV1 video. Unsupported combinations should be reported rather than silently producing invalid files.
 
-AUDIOX is designed for broad media compatibility. The interface accepts common audio and video files, while actual import/export support is determined by the FFmpeg build and available codecs.
+The current browser engine uses the single-thread FFmpeg.wasm core. Processing occurs locally in the browser, but browser memory and device performance limit practical file size and speed. The desktop native FFmpeg engine and a server worker tier remain future milestones for broader codec coverage and large-file processing.
 
-### Audio containers and formats
-MP3, WAV, FLAC, M4A, AAC, OGG, Opus, WMA, AIFF, ALAC, APE, AC3, DTS, AMR, MP2, AU, CAF, WV, TTA, VOC.
+## Downloader policy
+Downloader integrations are not enabled yet. They will only support sources and workflows that explicitly authorize downloading. AUDIOX will not bypass DRM, paywalls, access controls or platform restrictions.
 
-### Video containers and formats
-MP4, MKV, MOV, AVI, WebM, WMV, FLV, MPEG, MPG, M4V, 3GP, 3G2, TS, MTS, M2TS, VOB, OGV, MXF, ASF, DV, GIF.
+## Quality note
+Converting lossy audio to WAV or another lossless container does not restore information discarded by the original encoding.
 
-### Media capabilities planned
-- Extract audio from user-owned or authorized video files.
-- Convert between supported audio and video containers.
-- Batch conversion and per-file progress.
-- Configure audio bitrate, sample rate, channels and bit depth where supported.
-- Configure video codec, resolution, frame rate and quality where supported.
-- Inspect media streams before conversion and show unsupported codec/container combinations clearly.
-
-**Important:** a file extension is not a codec. For example, MP4 is a container that may hold H.264, HEVC or AV1 video. The UI must inspect actual streams and the selected FFmpeg build must include the relevant demuxers, muxers, decoders and encoders. Not every format can be encoded by every browser build. Server-side FFmpeg will provide the broader compatibility tier.
-
-AUDIOX only downloads from sources and workflows that explicitly permit downloading. It does not bypass platform restrictions or DRM.
+## Release checklist
+- Validate conversion with representative audio and video samples on each target OS.
+- Verify supported codecs and containers against the actual FFmpeg build.
+- Test large files, memory pressure, interrupted jobs and output playback.
+- Package native FFmpeg binaries only after license and redistribution review.
+- Sign Windows installers and sign/notarize macOS releases before public distribution.
