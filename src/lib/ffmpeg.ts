@@ -91,7 +91,7 @@ async function runConversion(
     }
     options.onProgress(1)
     return {
-      blob: new Blob([data], { type: MIME_TYPES[format] || 'application/octet-stream' }),
+      blob: new Blob([data as unknown as BlobPart], { type: MIME_TYPES[format] || 'application/octet-stream' }),
       filename: outputName
     }
   } finally {
