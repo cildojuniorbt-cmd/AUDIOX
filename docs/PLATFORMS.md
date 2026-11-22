@@ -1,25 +1,22 @@
-# AUDIOX delivery platforms
+# AUDIOX platform and delivery plan
 
-AUDIOX shares one React + TypeScript frontend across the browser and desktop applications.
+## Delivery targets
+- Browser: Vite web application.
+- Windows: Tauri 2 installer (NSIS .exe).
+- macOS: Tauri 2 disk image (.dmg).
 
-## Browser
-- Vite production build deployed as a web application.
-- Responsive layout and installable PWA support planned.
-- Browser conversion uses a browser-compatible FFmpeg build within browser memory and codec limitations.
+## Browser conversion engine
+The browser conversion engine uses the single-thread FFmpeg.wasm core loaded from a pinned CDN release. Files are processed locally in the browser and are not uploaded by the conversion workflow. Browser memory, available codecs, device performance and file size limit what can be converted reliably.
 
-## Windows
-- Tauri 2 desktop shell.
-- Installer target: NSIS (.exe).
-- Desktop build command: `npm run desktop:build` on a supported Windows build host.
+## Desktop engine
+The Tauri shell is configured for Windows NSIS and macOS DMG packaging. The next desktop milestone is packaging a native FFmpeg binary per operating system, invoking it through a safe process API, and adding OS-specific integration tests. Native binaries and codecs require license and redistribution review.
 
-## macOS
-- Tauri 2 desktop shell.
-- Installer target: DMG (.dmg).
-- Desktop build command: `npm run desktop:build` on a supported macOS build host.
+## Release requirements
+- Build Windows installers on Windows runners and macOS DMGs on macOS runners.
+- Sign Windows installers for public distribution.
+- Sign and notarize macOS apps with a Developer ID certificate.
+- Test clean installs, upgrades, file permissions, large files, and output playback.
+- Publish checksums and release notes.
 
-## Build and release notes
-- Windows and macOS packages should be built on their respective operating systems or on dedicated CI runners.
-- macOS distribution outside the App Store should be signed with a Developer ID certificate and notarized for a smooth Gatekeeper experience.
-- Windows signing is recommended for public distribution to reduce SmartScreen warnings.
-- Native FFmpeg binaries and their required licenses must be packaged and audited separately before enabling server-grade codec support in desktop builds.
-- Do not bundle third-party codecs or libraries without reviewing their licenses and redistribution terms.
+## Download policy
+Only integrate sources and workflows that explicitly authorize downloading. Do not bypass DRM, paywalls, access controls, or platform restrictions.
