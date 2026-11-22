@@ -1,5 +1,7 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg'
 import { fetchFile } from '@ffmpeg/util'
+import coreURL from '@ffmpeg/core/dist/umd/ffmpeg-core.js?url'
+import wasmURL from '@ffmpeg/core/dist/umd/ffmpeg-core.wasm?url'
 
 let instance: FFmpeg | null = null
 let loading: Promise<FFmpeg> | null = null
@@ -8,7 +10,6 @@ let progressSink: ((value: number) => void) | undefined
 let listenersAttached = false
 let conversionQueue: Promise<unknown> = Promise.resolve()
 
-const CORE_BASE = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd'
 const AUDIO_FORMATS = new Set(['mp3', 'wav', 'flac', 'm4a', 'aac', 'ogg', 'opus', 'wma', 'aiff', 'alac', 'ape', 'ac3', 'dts', 'amr', 'mp2'])
 const VIDEO_FORMATS = new Set(['mp4', 'mkv', 'mov', 'avi', 'webm', 'wmv', 'flv', 'mpeg', 'mpg', 'm4v', '3gp', 'ts', 'mts', 'm2ts', 'vob', 'ogv', 'mxf', 'asf', 'dv', 'gif'])
 const MIME_TYPES: Record<string, string> = {
@@ -44,8 +45,6 @@ export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: 
   if (!ffmpeg.loaded) {
     if (!loading) {
       loading = (async () => {
-        const coreURL = `${CORE_BASE}/ffmpeg-core.js`
-        const wasmURL = `${CORE_BASE}/ffmpeg-core.wasm`
         await ffmpeg.load({ coreURL, wasmURL })
         return ffmpeg
       })().catch(error => {
