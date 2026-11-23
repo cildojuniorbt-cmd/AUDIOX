@@ -103,3 +103,18 @@
  .library-backup-actions>*{overflow-wrap:anywhere;}
  .library-file{width:100%;max-width:100%;min-width:0;}
 }
+
+/* Mobile browser and installed PWA share one responsive navigation */
+@media(max-width:760px){
+ .sidebar{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:5px;padding:14px 12px;}
+ .sidebar .brand{flex:0 0 100%;width:100%;padding:2px 6px 12px;}
+ .sidebar .nav-label,.sidebar-bottom{display:none;}
+ .sidebar>.nav{display:flex;flex:1 1 0;width:auto;min-width:0;justify-content:center;gap:7px;margin:0;padding:11px 5px;font-size:12px;white-space:nowrap;}
+ .sidebar>.nav svg{width:17px;flex:0 0 auto;}
+ .main{padding-left:14px;padding-right:14px;}
+}
+@media(max-width:390px){
+ .sidebar{padding-left:9px;padding-right:9px;gap:3px;}
+ .sidebar>.nav{font-size:11px;gap:5px;padding:10px 3px;}
+ .sidebar>.nav svg{width:15px;}
+}
