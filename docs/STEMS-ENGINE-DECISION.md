@@ -60,7 +60,9 @@ A detecção de capacidade escolhe um perfil recomendado, mas o usuário poderá
 
 ## Modelos e licenças
 
-Código e pesos/checkpoints são ativos licenciáveis separadamente. Uma licença MIT do código de um projeto não prova que todos os pesos distribuídos com ele podem ser redistribuídos ou usados comercialmente.
+Código, pesos/checkpoints e dados de treinamento são camadas de direitos distintas. Uma licença MIT do código ou de uma exportação ONNX não prova, por si só, que os pesos e os dados de treinamento estão liberados para uso comercial e redistribuição.
+
+A pesquisa preliminar está registrada em [`docs/STEMS-MODEL-RESEARCH.md`](./STEMS-MODEL-RESEARCH.md). Resultado atual: HTDemucs não está aprovado para distribuição comercial; Open-Unmix UMX-HQ é apenas candidato a protótipo técnico controlado, pois foi treinado com MUSDB18-HQ, cujos termos oficiais restringem o uso comercial sem autorização dos titulares. Nenhum modelo está liberado para produção nesta etapa.
 
 Demucs/HTDemucs é uma referência técnica para benchmark de quatro stems, mas os pesos publicados não serão empacotados nem redistribuídos no AUDIOX até que a proveniência, licença e permissões dos checkpoints estejam documentadas e aprovadas.
 
@@ -90,14 +92,15 @@ Se não houver permissão clara, não incluir esse checkpoint no instalador nem 
 
 ## Sequência de implementação
 
-1. Fechar a matriz de modelos e licenças (código e pesos separadamente), incluindo hash, origem, redistribuição e uso comercial.
-2. Implementar o runtime ONNX Web em Web Worker e um contrato TypeScript de disponibilidade, instalação do modelo, separação, progresso, cancelamento e limpeza.
-3. Validar o primeiro modelo aprovado em iPhone Safari/PWA, com perfil econômico, segmentos, limites de memória e armazenamento offline.
-4. Validar Android Chrome/PWA, WebGPU quando compatível e fallback WASM.
-5. Integrar os quatro resultados à Biblioteca e ao fluxo Downloader → Stems, sem novo download nem cópia desnecessária do original.
-6. Testar WAV/MP3, integridade, duração, canais, sample rate, cancelamento, falhas, armazenamento e ausência de tráfego de áudio para servidores.
-7. Se a PWA não for estável o suficiente, avaliar runtimes nativos iOS e Android.
-8. Implementar runtimes Windows e macOS depois da validação mobile.
+1. Fechar a matriz de modelos, pesos e dados de treinamento; obter autorização escrita ou selecionar um modelo treinado com dados e direitos compatíveis com uso comercial e redistribuição.
+2. Fazer um protótipo técnico isolado com um candidato, sem distribuir pesos nem habilitar a função na PWA, para medir viabilidade do pipeline ONNX/WASM.
+3. Somente após aprovação de direitos, implementar o runtime ONNX Web em Web Worker e o contrato TypeScript de disponibilidade, instalação do modelo, separação, progresso, cancelamento e limpeza.
+4. Validar o primeiro modelo aprovado em iPhone Safari/PWA, com perfil econômico, segmentos, limites de memória e armazenamento offline.
+5. Validar Android Chrome/PWA, WebGPU quando compatível e fallback WASM.
+6. Integrar os quatro resultados à Biblioteca e ao fluxo Downloader → Stems, sem novo download nem cópia desnecessária do original.
+7. Testar WAV/MP3, integridade, duração, canais, sample rate, cancelamento, falhas, armazenamento e ausência de tráfego de áudio para servidores.
+8. Se a PWA não for estável o suficiente, avaliar runtimes nativos iOS e Android.
+9. Implementar runtimes Windows e macOS depois da validação mobile.
 
 ## Critérios de aceite do primeiro motor
 
