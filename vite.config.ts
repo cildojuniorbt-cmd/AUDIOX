@@ -2,7 +2,14 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const appVersion = '0.2.0'
+const buildId = process.env.GITHUB_SHA?.slice(0, 7) || 'local'
+
 export default defineConfig({
+  define: {
+    __APP_VERSION__: JSON.stringify(appVersion),
+    __APP_BUILD__: JSON.stringify(buildId)
+  },
   optimizeDeps: { exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'] },
   base: '/AUDIOX/',
   plugins: [
