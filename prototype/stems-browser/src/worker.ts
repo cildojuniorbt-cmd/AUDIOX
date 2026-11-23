@@ -19,13 +19,16 @@ scope.onmessage = async (event) => {
   if (event.data.type !== 'run') return
 
   try {
-    scope.postMessage({ type: 'status', message: 'Preparando o runtime ONNX e verificando o cache do modelo…' })
+    scope.postMessage({ type: 'status', message: 'Iniciando ONNX Runtime Web (WASM/CPU)…' })
+    scope.postMessage({ type: 'status', message: 'Carregando SCNet. No primeiro uso, cerca de 13 MB de pesos serão baixados; o áudio continua apenas neste dispositivo.' })
 
     const result = await separate(
       { channelData: event.data.channels, sampleRate: event.data.sampleRate },
       {
         model: 'scnet',
         device: 'wasm',
+        // WASM is the compatibility baseline for iOS Safari and Android Chrome.
+        // WebGPU will only be enabled after a separate device/model compatibility test.
         progress: ({ chunk, totalChunks }) => {
           scope.postMessage({
             type: 'progress',
