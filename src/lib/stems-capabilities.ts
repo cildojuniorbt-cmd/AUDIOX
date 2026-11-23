@@ -73,7 +73,7 @@ export async function detectStemsCapabilities(): Promise<StemsCapabilities> {
     (navigator as Navigator & { standalone?: boolean }).standalone === true
 
   if (!wasm) notes.push('Este navegador não oferece WebAssembly.')
-  if (platform === 'ios' && !webgpu) notes.push('No iPhone, o motor de navegador usará CPU/WASM; WebGPU não está disponível neste runtime.')
+  if (platform === 'ios') notes.push('No iPhone, o primeiro motor será validado com CPU/WASM. A presença de uma API gráfica não significa que WebGPU seja compatível com o modelo ou com este fluxo.')
   if (platform === 'ios') notes.push('Mantenha o AUDIOX aberto em primeiro plano durante a separação.')
   if (!crossOriginIsolated) notes.push('Execução WASM multithread não está habilitada nesta origem.')
   if (!persistentStorage) notes.push('O navegador ainda não confirmou armazenamento persistente; ele pode limpar o cache.')
