@@ -88,3 +88,18 @@
  .library-file .library-download{font-size:0;}
  .library-file .library-download svg{width:17px;height:17px;}
 }
+
+/* Evita que conteúdos internos aumentem a largura da página no mobile */
+@media(max-width:760px){
+ html,body,#root,.shell,.main{width:100%;max-width:100%;min-width:0;}
+ .main{overflow-x:clip;}
+ .panel{width:100%;max-width:100%;min-width:0;overflow:hidden;}
+ .panel *{min-width:0;}
+ .storage-overview,.largest-files,.library-tools,.library-bulkbar,.library-backup-actions,.file-list{width:100%;max-width:100%;min-width:0;}
+ .storage-stat,.storage-stat small,.largest-files>div,.library-tools>*,
+ .library-bulk-actions>*,.library-backup-actions>*,.library-bulkbar>*{min-width:0;max-width:100%;}
+ .storage-stat small{overflow-wrap:anywhere;}
+ .library-tools select,.library-tools input{width:100%;max-width:100%;}
+ .library-backup-actions>*{overflow-wrap:anywhere;}
+ .library-file{width:100%;max-width:100%;min-width:0;}
+}
