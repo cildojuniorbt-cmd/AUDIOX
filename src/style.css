@@ -20,3 +20,6 @@
 
 
 .version-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;margin:0 0 16px;border:1px solid #285264;border-radius:12px;background:linear-gradient(100deg,#102d3b,#0d202d)}.version-card>div{display:flex;flex-direction:column;gap:5px}.version-kicker{font-size:9px;letter-spacing:1.5px;color:#61cbd8;font-weight:700}.version-card strong{font:600 20px 'Space Grotesk';color:#e5f3f7}.version-card small{font-size:10px;color:#8ba3b1}.version-status{font-size:9px;letter-spacing:1px;color:#55d6a3;border:1px solid #28614f;border-radius:20px;padding:6px 9px}.build-version{font-variant-numeric:tabular-nums;overflow-wrap:anywhere;text-align:right}@media(max-width:600px){.build-version{text-align:left}}
+
+
+.job-format{max-width:105px;min-width:82px;padding:7px 8px;border:1px solid #29495a;border-radius:7px;background:#102b3a;color:#dceaf0;font-size:10px}.job-format:focus{outline:1px solid #55d6e3}@media(max-width:600px){.job-format{max-width:82px;min-width:72px}}
