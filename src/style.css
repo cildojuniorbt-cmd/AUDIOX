@@ -17,3 +17,6 @@
 
 .media-preview{margin:16px 0;padding:16px;border:1px solid #285264;background:#0b2230;border-radius:12px}.preview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;color:#dceaf0;font-size:12px}.media-preview audio,.media-preview video{display:block;width:100%;max-height:420px;border-radius:8px;background:#050b11}.media-preview video{object-fit:contain}.media-preview audio{height:42px}
 @media(max-width:600px){.media-preview{padding:12px}.file{gap:7px}.library-download{padding:6px 4px;font-size:10px}}
+
+
+.version-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;margin:0 0 16px;border:1px solid #285264;border-radius:12px;background:linear-gradient(100deg,#102d3b,#0d202d)}.version-card>div{display:flex;flex-direction:column;gap:5px}.version-kicker{font-size:9px;letter-spacing:1.5px;color:#61cbd8;font-weight:700}.version-card strong{font:600 20px 'Space Grotesk';color:#e5f3f7}.version-card small{font-size:10px;color:#8ba3b1}.version-status{font-size:9px;letter-spacing:1px;color:#55d6a3;border:1px solid #28614f;border-radius:20px;padding:6px 9px}.build-version{font-variant-numeric:tabular-nums;overflow-wrap:anywhere;text-align:right}@media(max-width:600px){.build-version{text-align:left}}
