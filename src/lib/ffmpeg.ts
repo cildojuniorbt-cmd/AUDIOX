@@ -62,7 +62,7 @@ export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: 
 async function runConversion(
   file: File,
   format: string,
-  options: { bitrate: string; onProgress: (value: number) => void; onLog: (message: string) => void }
+  options: { bitrate: string; peakProtection: boolean; onProgress: (value: number) => void; onLog: (message: string) => void }
 ) {
   if (!AUDIO_FORMATS.has(format) && !VIDEO_FORMATS.has(format)) {
     throw new Error('Formato de saída não reconhecido.')
@@ -88,7 +88,8 @@ async function runConversion(
       args.push('-vn')
       if (format === 'mp3') {
         // A very gentle peak ceiling helps reduce encoder-induced overs on MP3 without normalizing or compressing the whole mix.
-        args.push('-af', 'alimiter=limit=0.98:attack=5:release=50:level=0', '-b:a', `${options.bitrate}k`)
+        if (options.peakProtection) args.push('-af', 'alimiter=limit=0.98:attack=5:release=50:level=0')
+        args.push('-b:a', `${options.bitrate}k`)
       }
     }
     if (['mp4', 'mov', 'm4v'].includes(format)) args.push('-movflags', '+faststart')
