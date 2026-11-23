@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-const appVersion = '0.2.1'
+const appVersion = '0.2.2'
 const buildId = process.env.GITHUB_SHA?.slice(0, 7) || 'local'
 
 export default defineConfig({
