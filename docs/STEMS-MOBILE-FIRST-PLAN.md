@@ -2,11 +2,15 @@
 
 Data: 2026-11-23
 
-## Ordem de prioridade aprovada
+## Ordem de prioridade aprovada e bloqueio de escopo
 
-1. PWA/navegador no iPhone (Safari e instalação na Tela de Início).
-2. Android (Chrome/PWA e, quando necessário, runtime nativo).
-3. Windows e macOS somente depois da validação mobile.
+1. **iPhone no Safari e PWA instalada na Tela de Início.**
+2. **Android no Chrome e PWA instalada.**
+3. **Somente após aprovação dos dois alvos móveis:** iniciar runtimes e empacotamento para macOS e Windows.
+
+Não iniciar implementação, otimização ou testes de produto específicos para Mac/Windows antes de concluir os critérios de aceite mobile abaixo. A interface e a inferência devem funcionar diretamente no navegador do celular; Mac/PC não serão requisitos para o usuário final executar a separação. Um computador pode ser usado pela equipe apenas como ambiente de desenvolvimento/servidor temporário, nunca como dependência de processamento do celular.
+
+**Gate de saída mobile:** só avançar para desktop depois de confirmar no iPhone Safari e Android Chrome: carregar modelo, processar uma faixa, gerar quatro stems, reproduzir/exportar resultados, persistir o modelo e repetir um teste offline, sem enviar áudio para servidor.
 
 O objetivo é processamento local/offline, sem enviar áudio para servidores e sem créditos por separação.
 
