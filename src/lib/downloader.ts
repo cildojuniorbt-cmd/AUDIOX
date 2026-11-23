@@ -31,6 +31,14 @@ export async function downloadDirectMedia(
   if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password) {
     throw new Error('Use um link HTTP ou HTTPS público, sem credenciais embutidas.')
   }
+  const host = url.hostname.toLowerCase().replace(/^www\./, '')
+  if (host === 'youtu.be' || host.endsWith('youtube.com') || host.endsWith('youtube-nocookie.com')) {
+    throw new Error('Este é um link de página do YouTube, não um arquivo de mídia direto. O AUDIOX ainda não possui integração autorizada com o YouTube. Para vídeos do seu próprio canal, baixe o arquivo pelo YouTube Studio e depois importe-o no Conversor. Não é possível extrair MP3/MP4 deste link por este módulo.')
+  }
+  if (host.endsWith('instagram.com') || host.endsWith('facebook.com') || host.endsWith('tiktok.com') || host.endsWith('x.com') || host.endsWith('twitter.com')) {
+    throw new Error('Este é um link de página de rede social, não um arquivo direto. O AUDIOX ainda não possui integração oficial para esta plataforma. Use a opção de download/exportação disponibilizada pela própria rede, quando disponível, e importe o arquivo no Conversor.')
+  }
+
   const extension = url.pathname.split('.').pop()?.toLowerCase() || ''
   if (!MEDIA_EXTENSIONS.has(extension)) {
     throw new Error('Este endereço não parece apontar diretamente para um arquivo de áudio ou vídeo. Links de páginas de redes sociais e plataformas precisam de integração oficial.')
