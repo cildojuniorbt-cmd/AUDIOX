@@ -328,3 +328,10 @@
 .detail-note{margin:16px 0;color:#8da4af;font-size:11px;line-height:1.6}
 .detail-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
 @media(max-width:560px){.detail-backdrop{padding:12px}.detail-dialog{padding:16px}.detail-grid{grid-template-columns:1fr}.detail-actions{flex-wrap:wrap}.detail-actions button{flex:1}}
+
+
+/* AUDIOX 0.2.7: aviso preventivo para backups grandes */
+.backup-warning-dialog>p{color:#b4c5ce;font-size:12px;line-height:1.7;margin:10px 0}
+.backup-warning-dialog>p strong{color:#e9f8fb}
+.backup-warning-dialog .detail-actions{margin-top:22px}
+@media(max-width:560px){.backup-warning-dialog .detail-actions{flex-direction:column-reverse}.backup-warning-dialog .detail-actions button{width:100%;min-height:42px}}
