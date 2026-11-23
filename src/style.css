@@ -275,3 +275,16 @@
  .main{margin:0!important;align-self:stretch;min-height:0}
  .shell{align-items:stretch;justify-content:flex-start}
 }
+
+
+/* Transferência segura da Biblioteca entre Safari e app instalado */
+.library-transfer-note{
+ margin:14px 0;padding:13px 15px;border:1px solid #245064;
+ border-radius:10px;background:linear-gradient(110deg,#102b39,#0c1e2b);
+}
+.library-transfer-note b{display:block;color:#60d6e3;font-size:9px;letter-spacing:1.35px;margin-bottom:7px}
+.library-transfer-note p{margin:0;color:#9bb0bc;font-size:11px;line-height:1.55}
+@media(max-width:760px){
+ .library-transfer-note{padding:12px;margin:12px 0}
+ .library-transfer-note p{font-size:11px;line-height:1.5}
+}
