@@ -77,7 +77,7 @@ async function runConversion(
   const extension = file.name.split('.').pop()?.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 10) || 'bin'
   const token = crypto.randomUUID().replace(/-/g, '')
   const inputName = `input_${token}.${extension}`
-  const outputName = `${safeBase}_AUDIOX_${token.slice(0, 8)}.${format}`
+  const outputName = `${safeBase} (AUDIOX).${format}`
 
   try {
     options.onProgress(0)
