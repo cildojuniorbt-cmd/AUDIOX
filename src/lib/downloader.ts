@@ -4,6 +4,7 @@ const MEDIA_EXTENSIONS = new Set([
 ])
 
 const MEDIA_MIME = /^(audio|video)\//
+const MIME_EXTENSIONS: Record<string, string> = { 'audio/mpeg':'mp3', 'audio/mp3':'mp3', 'audio/wav':'wav', 'audio/x-wav':'wav', 'audio/flac':'flac', 'audio/mp4':'m4a', 'audio/aac':'aac', 'audio/ogg':'ogg', 'audio/opus':'opus', 'audio/webm':'webm', 'video/mp4':'mp4', 'video/webm':'webm', 'video/quicktime':'mov', 'video/x-matroska':'mkv', 'video/x-msvideo':'avi', 'video/mpeg':'mpeg', 'video/3gpp':'3gp' }
 
 function filenameFromResponse(response: Response, url: URL, mime: string) {
   const disposition = response.headers.get('content-disposition') || ''
@@ -12,7 +13,7 @@ function filenameFromResponse(response: Response, url: URL, mime: string) {
   let name = encoded ? decodeURIComponent(encoded) : plain
   if (!name) name = decodeURIComponent(url.pathname.split('/').filter(Boolean).pop() || '')
   if (!name || !name.includes('.')) {
-    const extension = mime.includes('mpeg') ? 'mp3' : mime.includes('mp4') ? 'mp4' : mime.includes('webm') ? 'webm' : mime.includes('wav') ? 'wav' : mime.startsWith('audio/') ? 'audio' : 'video'
+    const extension = MIME_EXTENSIONS[mime] || (mime.startsWith('audio/') ? 'audio' : 'video')
     name = `AUDIOX-download.${extension}`
   }
   return name.replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').slice(0, 160)
@@ -39,10 +40,9 @@ export async function downloadDirectMedia(
     throw new Error('Este é um link de página de rede social, não um arquivo direto. O AUDIOX ainda não possui integração oficial para esta plataforma. Use a opção de download/exportação disponibilizada pela própria rede, quando disponível, e importe o arquivo no Conversor.')
   }
 
-  const extension = url.pathname.split('.').pop()?.toLowerCase() || ''
-  if (!MEDIA_EXTENSIONS.has(extension)) {
-    throw new Error('Este endereço não parece apontar diretamente para um arquivo de áudio ou vídeo. Links de páginas de redes sociais e plataformas precisam de integração oficial.')
-  }
+  const pathName = url.pathname.split('/').filter(Boolean).pop() || ''
+  const extension = pathName.includes('.') ? pathName.split('.').pop()?.toLowerCase() || '' : ''
+  if (['m3u8', 'mpd'].includes(extension)) throw new Error('Este link é uma lista de transmissão HLS/DASH, não um arquivo único. O suporte a streaming ainda não está disponível.')
 
   let response: Response
   try {
@@ -52,9 +52,9 @@ export async function downloadDirectMedia(
   }
   if (!response.ok) throw new Error(`O servidor respondeu HTTP ${response.status}. Verifique se o link está público e ainda válido.`)
   const mime = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase()
-  if (!MEDIA_MIME.test(mime) && !MEDIA_EXTENSIONS.has(extension)) {
-    throw new Error('O servidor não identificou o conteúdo como áudio ou vídeo.')
-  }
+  const responsePath = new URL(response.url || url.href).pathname.split('/').filter(Boolean).pop() || ''
+  const responseExtension = responsePath.includes('.') ? responsePath.split('.').pop()?.toLowerCase() || '' : ''
+  if (!MEDIA_MIME.test(mime) && !MEDIA_EXTENSIONS.has(extension) && !MEDIA_EXTENSIONS.has(responseExtension)) throw new Error('O servidor não identificou o conteúdo como áudio ou vídeo. Use um link direto para um arquivo de mídia.')
   const length = Number(response.headers.get('content-length') || 0)
   if (length > 500 * 1024 * 1024) throw new Error('O arquivo ultrapassa o limite de 500 MB da versão web.')
   const name = filenameFromResponse(response, new URL(response.url || url.href), mime)
