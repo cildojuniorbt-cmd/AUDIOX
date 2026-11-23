@@ -23,3 +23,5 @@
 
 
 .job-format{max-width:105px;min-width:82px;padding:7px 8px;border:1px solid #29495a;border-radius:7px;background:#102b3a;color:#dceaf0;font-size:10px}.job-format:focus{outline:1px solid #55d6e3}@media(max-width:600px){.job-format{max-width:82px;min-width:72px}}
+
+.job-bitrate{max-width:76px;min-width:64px;padding:7px 6px;border:1px solid #29495a;border-radius:7px;background:#102b3a;color:#dceaf0;font-size:10px}.job-bitrate:focus{outline:1px solid #55d6e3}@media(max-width:600px){.job-bitrate{max-width:66px;min-width:58px}}
