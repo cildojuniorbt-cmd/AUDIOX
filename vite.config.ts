@@ -37,7 +37,7 @@ export default defineConfig({
         clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,svg,woff2}'],
         runtimeCaching: [{
-          urlPattern: /\\/AUDIOX\\/ffmpeg\\/.*\\.(?:js|wasm)$/i,
+          urlPattern: /\/AUDIOX\/ffmpeg\/.*\.(?:js|wasm)$/i,
           handler: 'CacheFirst',
           options: { cacheName: 'audiox-ffmpeg-assets', expiration: { maxEntries: 4, maxAgeSeconds: 2592000 }, cacheableResponse: { statuses: [0, 200] } }
         }]
