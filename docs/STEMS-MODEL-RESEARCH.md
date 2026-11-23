@@ -17,6 +17,7 @@ Demucs/HTDemucs fica igualmente bloqueado para distribuição comercial: o mante
 |---|---|---|---|---|
 | Demucs / HTDemucs | 4 stems | Exportações ONNX para browser existem; arquitetura híbrida mais pesada | Código MIT, mas o mantenedor declarou que os pesos não são cobertos por MIT e são apenas para fins científicos | **Não usar em build comercial** sem autorização escrita específica |
 | Open-Unmix UMX-HQ | 4 stems independentes | Candidato para protótipo ONNX/WASM; 4 redes separadas e STFT/iSTFT no host | O registro dos pesos UMX-HQ existe no Zenodo; há declarações MIT para UMX-HQ, mas o treinamento usa MUSDB18-HQ, cujo material é educacional e não comercial sem autorização dos titulares | **Somente benchmark técnico controlado**; não aprovar para distribuição comercial |
+| SCNet (ONNX int8) | 4 stems | Exportação ONNX de cerca de 12,9 MB; há implementação de browser com WASM/WebGPU, mas uso em iPhone precisa ser testado | Autor confirmou MIT para pesos; checkpoint treinado em MUSDB18-HQ, cujos termos restringem o material a fins educacionais e uso comercial sem autorização | **Melhor candidato técnico para benchmark mobile; bloqueado para produção comercial até resolver direitos dos dados** |
 | Open-Unmix UMX-L | 4 stems | Variante de maior capacidade | Pesos declarados CC BY-NC-SA 4.0 | **Descartar para produto comercial** |
 | MixDirective Stem Splitter | 4 stems | ONNX FP16 pequeno e arquitetura derivada de HTDemucs | Pesos proprietários; licença restringe uso ao app Mix Directive e proíbe redistribuição/uso externo | **Não usar** |
 | Demixr | 4 stems em app Flutter | Referência de arquitetura mobile; usa ExecuTorch/CoreML/Vulkan e ONNX CPU | Repositório do app MIT; licença dos pesos/runtime deve ser auditada separadamente | **Referência técnica, não dependência** |
@@ -29,6 +30,15 @@ Demucs/HTDemucs fica igualmente bloqueado para distribuição comercial: o mante
 - Em 2022-05-23, o mantenedor respondeu: “The model weights are not covered by the MIT license, and are provided only for scientific purposes.”
 - O repositório de código tem licença MIT, mas isso não substitui a declaração específica sobre os pesos.
 - Um espelho ONNX pode declarar MIT para sua exportação; isso, isoladamente, não altera os direitos sobre os pesos de origem.
+
+### SCNet
+
+- Model card ONNX: https://huggingface.co/square-zero-labs/scnet
+- O checkpoint int8 publicado tem aproximadamente 12,9 MB e produz quatro stems.
+- O autor confirmou MIT para os pesos e para redistribuição de conversões ONNX; ver a seção de licença do model card.
+- O próprio model card informa treinamento com MUSDB18-HQ. O registro oficial desse dataset limita o material a fins educacionais e exige autorização dos titulares para uso comercial.
+- Há uma demonstração de separação no navegador com WASM/WebGPU: https://audio.js.org/util/stem-splitter/. A página relata uso de memória elevado em arquivos longos, portanto o teste mobile é obrigatório.
+- Decisão: candidato técnico prioritário para um benchmark de browser, mas não liberado para produção comercial até resolver a questão dos direitos do conjunto de treinamento.
 
 ### Open-Unmix UMX-HQ
 
@@ -53,7 +63,7 @@ Demucs/HTDemucs fica igualmente bloqueado para distribuição comercial: o mante
 ## Recomendação de engenharia
 
 1. Manter a separação desativada na PWA até existir um modelo aprovado e testes reais.
-2. Criar um protótipo isolado com Open-Unmix UMX-HQ apenas para medir viabilidade técnica, sem distribuir pesos e sem usar faixas de terceiros sem autorização.
+2. Criar um protótipo isolado de browser com SCNet int8 como primeira referência de desempenho e Open-Unmix UMX-HQ como comparação de arquitetura; apenas benchmark controlado, sem distribuir pesos e sem usar faixas de terceiros sem autorização.
 3. Implementar o caminho de áudio (decode → resample → STFT → ONNX → mask → iSTFT → stems) em Worker, começando com WASM/CPU.
 4. Medir memória, tempo, aquecimento e estabilidade em Safari iOS e Chrome Android. Não prometer WebGPU no iPhone.
 5. Para uma versão comercial, preferir uma destas rotas:
