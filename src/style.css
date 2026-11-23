@@ -288,3 +288,19 @@
  .library-transfer-note{padding:12px;margin:12px 0}
  .library-transfer-note p{font-size:11px;line-height:1.5}
 }
+
+
+/* Ações rápidas para gerenciar os maiores arquivos da Biblioteca */
+.largest-file-row{align-items:center}
+.largest-file-remove{
+ display:flex;align-items:center;justify-content:center;flex:0 0 30px;
+ width:30px;height:30px;border:1px solid #68434a;border-radius:7px;
+ background:#2a1b23;color:#e7a1a1;cursor:pointer
+}
+.largest-file-remove:active{transform:scale(.96)}
+@media(max-width:760px){
+ .largest-file-row{gap:8px;padding:8px 0}
+ .largest-file-row>span{flex:1;min-width:0;white-space:normal;overflow-wrap:anywhere}
+ .largest-file-row>strong{font-size:10px}
+ .largest-file-remove{width:32px;height:32px;flex-basis:32px}
+}
