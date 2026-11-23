@@ -29,6 +29,8 @@ jobs:
         run: npm install
       - name: Build AUDIOX
         run: npm run build
+        env:
+          VITE_BASE_PATH: /AUDIOX/
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

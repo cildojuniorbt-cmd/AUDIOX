@@ -89,7 +89,10 @@ async function runConversion(
       if (format === 'mp3') {
         // A very gentle peak ceiling helps reduce encoder-induced overs on MP3 without normalizing or compressing the whole mix.
         if (options.peakProtection) args.push('-af', 'alimiter=limit=0.98:attack=5:release=50:level=0')
-        args.push('-b:a', `${options.bitrate}k`)
+        args.push('-c:a', 'libmp3lame', '-b:a', `${options.bitrate}k`)
+      } else if (format === 'wav') {
+        // Explicitly select 16-bit little-endian PCM in a WAV container.
+        args.push('-c:a', 'pcm_s16le', '-f', 'wav')
       }
     }
     if (['mp4', 'mov', 'm4v'].includes(format)) args.push('-movflags', '+faststart')

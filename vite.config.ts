@@ -4,6 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 const appVersion = '0.2.14'
 const buildId = process.env.GITHUB_SHA?.slice(0, 7) || 'local'
+const base = process.env.VITE_BASE_PATH || '/'
 
 export default defineConfig({
   define: {
@@ -11,7 +12,7 @@ export default defineConfig({
     __APP_BUILD__: JSON.stringify(buildId)
   },
   optimizeDeps: { exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'] },
-  base: '/AUDIOX/',
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -37,7 +38,7 @@ export default defineConfig({
         clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,svg,woff2}'],
         runtimeCaching: [{
-          urlPattern: /\/AUDIOX\/ffmpeg\/.*\.(?:js|wasm)$/i,
+          urlPattern: /\/ffmpeg\/.*\.(?:js|wasm)$/i,
           handler: 'CacheFirst',
           options: { cacheName: 'audiox-ffmpeg-assets', expiration: { maxEntries: 4, maxAgeSeconds: 2592000 }, cacheableResponse: { statuses: [0, 200] } }
         }]
