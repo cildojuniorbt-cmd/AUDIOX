@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#10151d" />
+    <meta name="description" content="Protótipo isolado de separação local de áudio do AUDIOX." />
+    <title>AUDIOX · Stems Browser Lab</title>
+  </head>
+  <body>
+    <main id="app">
+      <header class="topbar">
+        <div class="brand-mark">A</div>
+        <div>
+          <p class="eyebrow">NEXUS WORKS DIGITAL</p>
+          <h1>AUDIOX <span>STEMS LAB</span></h1>
+        </div>
+        <span class="lab-tag">PROTÓTIPO</span>
+      </header>
+
+      <section class="intro">
+        <p class="eyebrow">BROWSER INFERENCE / WASM</p>
+        <h2>Separação local.<br /><span>Sem enviar seu áudio.</span></h2>
+        <p class="muted">Laboratório isolado para validar o SCNet no navegador antes de qualquer integração ao AUDIOX.</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ETAPA 01</p>
+            <h3>Escolha uma faixa curta</h3>
+          </div>
+          <span class="limit">ATÉ 8 SEGUNDOS</span>
+        </div>
+        <label class="file-picker" for="audio-file">
+          <span class="file-icon">♫</span>
+          <span><strong>Selecionar áudio</strong><small>MP3, WAV ou formato compatível com o navegador</small></span>
+          <span class="pick-arrow">＋</span>
+        </label>
+        <input id="audio-file" type="file" accept="audio/*" />
+        <p id="file-info" class="file-info">Nenhum arquivo selecionado.</p>
+        <div class="privacy-note"><span class="dot"></span> O áudio é processado neste dispositivo. Apenas os arquivos do motor e do modelo são baixados.</div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ETAPA 02</p>
+            <h3>Motor de IA</h3>
+          </div>
+          <span class="model-size">SCNet · 12,9 MB</span>
+        </div>
+        <div class="engine-row">
+          <div class="engine-icon">◎</div>
+          <div class="engine-copy"><strong>SCNet INT8 · ONNX</strong><small>WASM / CPU · modelo baixado sob demanda</small></div>
+          <span id="engine-state" class="state">AGUARDANDO</span>
+        </div>
+        <p class="muted small">O primeiro teste baixa o modelo e o runtime ONNX. O navegador poderá guardar o modelo em cache para reutilização. O download pode consumir dados móveis.</p>
+        <button id="run-button" class="primary" disabled>Iniciar teste local</button>
+        <button id="cancel-button" class="secondary" hidden>Cancelar teste</button>
+        <div class="progress-track"><div id="progress-bar"></div></div>
+        <p id="status" class="status" role="status" aria-live="polite">Selecione um áudio de até 8 segundos para começar.</p>
+      </section>
+
+      <section id="results" class="panel results" hidden>
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ETAPA 03</p>
+            <h3>Stems gerados</h3>
+          </div>
+          <span class="success-tag">CONCLUÍDO</span>
+        </div>
+        <div id="stem-list" class="stem-list"></div>
+      </section>
+
+      <footer>
+        <p>A NEXUS Product · Experimental build</p>
+        <p>Não representa uma função liberada para produção.</p>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
