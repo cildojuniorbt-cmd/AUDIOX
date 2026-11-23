@@ -268,3 +268,10 @@
  .library-file .file-icon,.library-file .file-info{flex:none}
  .library-file>*{min-width:0;max-width:100%}
 }
+
+
+/* Ajuste de viewport no iOS: a margem automática do desktop não pode centralizar a página verticalmente */
+@media(max-width:760px){
+ .main{margin:0!important;align-self:stretch;min-height:0}
+ .shell{align-items:stretch;justify-content:flex-start}
+}
