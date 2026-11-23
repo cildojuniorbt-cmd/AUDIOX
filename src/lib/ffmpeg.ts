@@ -1,5 +1,5 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg'
-import { fetchFile, toBlobURL } from '@ffmpeg/util'
+import { fetchFile } from '@ffmpeg/util'
 
 let instance: FFmpeg | null = null
 let loading: Promise<FFmpeg> | null = null
@@ -8,7 +8,7 @@ let progressSink: ((value: number) => void) | undefined
 let listenersAttached = false
 let conversionQueue: Promise<unknown> = Promise.resolve()
 
-const CORE_BASE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm'
+const CORE_BASE = `${import.meta.env.BASE_URL}ffmpeg/`
 
 const AUDIO_FORMATS = new Set(['mp3', 'wav', 'flac', 'm4a', 'aac', 'ogg', 'opus', 'wma', 'aiff', 'alac', 'ape', 'ac3', 'dts', 'amr', 'mp2'])
 const VIDEO_FORMATS = new Set(['mp4', 'mkv', 'mov', 'avi', 'webm', 'wmv', 'flv', 'mpeg', 'mpg', 'm4v', '3gp', 'ts', 'mts', 'm2ts', 'vob', 'ogv', 'mxf', 'asf', 'dv', 'gif'])
@@ -45,8 +45,8 @@ export async function getFFmpeg(onLog?: (message: string) => void, onProgress?: 
   if (!ffmpeg.loaded) {
     if (!loading) {
       loading = (async () => {
-        const coreURL = await toBlobURL(`${CORE_BASE}/ffmpeg-core.js`, 'text/javascript')
-        const wasmURL = await toBlobURL(`${CORE_BASE}/ffmpeg-core.wasm`, 'application/wasm')
+        const coreURL = new URL(`${CORE_BASE}ffmpeg-core.js`, window.location.href).href
+        const wasmURL = new URL(`${CORE_BASE}ffmpeg-core.wasm`, window.location.href).href
         await ffmpeg.load({ coreURL, wasmURL })
         return ffmpeg
       })().catch(error => {
