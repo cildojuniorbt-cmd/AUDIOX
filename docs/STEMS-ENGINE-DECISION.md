@@ -33,6 +33,10 @@ Usar ONNX Runtime Web em Web Worker. Preferir WebGPU somente após confirmar ada
 
 Ficam para uma etapa posterior à validação móvel. Avaliar runtimes nativos/sidecars adequados a cada sistema, sem presumir que CUDA do Windows seja reutilizável no macOS. CPU deve continuar sendo uma alternativa quando viável.
 
+### Protótipo técnico isolado
+
+Existe um laboratório independente em `prototype/stems-browser/`. Ele testa SCNet INT8 com `@audio/neural-separate` e ONNX Runtime Web em Web Worker, usando WASM/CPU, com limite inicial de 8 segundos. As dependências ficam em um `package.json` próprio e não são adicionadas ao app principal. O protótipo não inclui nem hospeda pesos no repositório; o runtime obtém o modelo sob demanda e pode mantê-lo no cache do navegador. O objetivo é validar compatibilidade, responsividade, memória e qualidade em Safari iOS e Chrome Android. O teste não aprova o modelo para uso comercial e não habilita Stems na PWA pública.
+
 ### Limite atual da implementação
 
 A PWA atual ainda não executa separação por IA. `stems-capabilities.ts` apenas detecta recursos do navegador; isso não comprova que um modelo esteja instalado ou que seus operadores sejam executáveis. `stems.ts` atualmente conversa com um serviço externo local em `127.0.0.1:8420`, não com um Web Worker ONNX. A ação de separação na PWA deve permanecer desativada até que o runtime, modelo, persistência e testes estejam completos. FFmpeg.wasm faz conversão/decodificação, não separação por IA.
