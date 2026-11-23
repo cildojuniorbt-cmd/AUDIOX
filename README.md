@@ -1,6 +1,6 @@
 # AUDIOX
 
-**A NEXUS Product** · Convert • Extract • Manage
+**Nexus Works Digital** · Convert • Extract • Manage
 
 AUDIOX is a cross-platform audio and video workspace with one shared React + TypeScript frontend.
 
