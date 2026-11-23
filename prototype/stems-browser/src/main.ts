@@ -19,7 +19,6 @@ const stemList = document.querySelector<HTMLElement>('#stem-list')!
 
 let selectedFile: File | null = null
 let activeWorker: Worker | null = null
-let fileUrl: string | null = null
 
 const MAX_DURATION_SECONDS = 8
 const MAX_FILE_BYTES = 20 * 1024 * 1024
@@ -224,7 +223,7 @@ runButton.addEventListener('click', async () => {
       setBusy(false)
     }
 
-    const transfer = channels.map(channel => channel.buffer)
+    const transfer = channels.map(channel => channel.buffer as ArrayBuffer)
     activeWorker.postMessage({
       type: 'run',
       channels,
@@ -249,5 +248,4 @@ cancelButton.addEventListener('click', () => {
 
 window.addEventListener('beforeunload', () => {
   activeWorker?.terminate()
-  if (fileUrl) URL.revokeObjectURL(fileUrl)
 })
