@@ -17,6 +17,10 @@ AUDIOX is a cross-platform audio and video workspace with one shared React + Typ
 - Conversion logs and per-file error handling.
 - Tauri desktop shell and platform package workflows.
 
+## AI stems roadmap
+
+The integrated **Download + Stems** workflow is specified in [docs/STEMS-ROADMAP.md](docs/STEMS-ROADMAP.md). The first target is local desktop separation into vocals, drums, bass and other instruments, with WAV or MP3 export. It is not enabled yet: the AI engine, desktop sidecar and platform tests must be completed before the UI offers it as a working action. Web/PWA processing will require a separately disclosed remote service or another validated browser-compatible engine.
+
 ## Public web version
 
 The production web app is published through GitHub Pages at `https://cildojuniorbt-cmd.github.io/AUDIOX/`. Pushes to `main` trigger the Pages deployment workflow.
