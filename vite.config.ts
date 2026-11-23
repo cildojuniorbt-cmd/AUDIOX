@@ -15,7 +15,7 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'prompt',
+      registerType: 'autoUpdate',
       includeAssets: [],
       manifest: {
         name: 'AUDIOX | Nexus Works Digital',
