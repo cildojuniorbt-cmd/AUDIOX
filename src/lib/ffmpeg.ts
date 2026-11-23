@@ -91,7 +91,7 @@ async function runConversion(
         if (options.peakProtection) args.push('-af', 'alimiter=limit=0.98:attack=5:release=50:level=0')
         args.push('-c:a', 'libmp3lame', '-b:a', `${options.bitrate}k`)
       } else if (format === 'wav') {
-        // Explicitly select uncompressed PCM and the WAV container.
+        // Explicitly select 16-bit little-endian PCM in a WAV container.
         args.push('-c:a', 'pcm_s16le', '-f', 'wav')
       }
     }
