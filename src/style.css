@@ -344,3 +344,12 @@
 
 /* Download output selection */
 .download-choice{margin:22px 0 8px;padding:18px;border:1px solid #1c3d4e;border-radius:13px;background:#0d202d}.download-choice-label,.download-format-label{display:block;color:#6bdbe5;font-size:10px;font-weight:700;letter-spacing:1.2px}.download-kind-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 18px}.download-kind{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:15px;border:1px solid #254557;border-radius:10px;background:#102635;color:#dceaf0;text-align:left;cursor:pointer}.download-kind svg{width:22px;height:22px;color:#62d8e5}.download-kind strong{font:600 13px 'Space Grotesk'}.download-kind small{font-size:10px;color:#849ba8}.download-kind.active{border-color:#4acbd9;background:#123441;box-shadow:inset 0 0 0 1px #4acbd944}.download-format-select{width:100%;margin-top:9px;padding:12px 13px;border:1px solid #254557;border-radius:9px;background:#102635;color:#e9f1f7}.download-format-hint{display:block;margin-top:8px;color:#849ba8;font-size:10px}@media(max-width:760px){.download-choice{padding:14px}.download-kind-options{gap:8px}.download-kind{padding:12px}}
+
+/* AUDIOX Stems local engine */
+.stem-engine-status{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding:10px 12px;border:1px solid #254557;border-radius:9px;background:#0a1a25;color:#91a9b6;font-size:10px}
+.stem-results{margin:18px 0;padding:16px;border:1px solid #285061;border-radius:12px;background:#0b1d29}
+.stem-results>b{display:block;margin-bottom:10px;color:#62d8e5;font-size:10px;letter-spacing:1.2px}
+.stem-result{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #203847;font-size:11px}
+.stem-result span{color:#dceaf0;font-weight:700}
+.stem-result a{color:#59d6a8;text-decoration:none;font-weight:700}
+@media(max-width:560px){.stem-engine-status,.stem-result{align-items:flex-start;flex-direction:column}.stem-engine-status button{width:100%}}
