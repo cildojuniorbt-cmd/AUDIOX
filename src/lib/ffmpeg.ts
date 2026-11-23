@@ -126,3 +126,31 @@ export function convertMedia(
   conversionQueue = task.catch(() => undefined)
   return task
 }
+
+
+export async function decodeAudioToPcm(file: File, onProgress?: (value: number) => void): Promise<Uint8Array> {
+  if (!file.size) throw new Error('O arquivo de áudio está vazio.')
+  if (file.size > 500 * 1024 * 1024) throw new Error('O arquivo ultrapassa o limite de 500 MB.')
+  const task = conversionQueue.then(async () => {
+    const ffmpeg = await getFFmpeg(undefined, onProgress)
+    const token = crypto.randomUUID().replace(/-/g, '')
+    const extension = file.name.split('.').pop()?.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 8) || 'bin'
+    const inputName = `stems_input_${token}.${extension}`
+    const outputName = `stems_pcm_${token}.raw`
+    try {
+      onProgress?.(0)
+      await ffmpeg.writeFile(inputName, await fetchFile(file))
+      const code = await ffmpeg.exec(['-y', '-i', inputName, '-vn', '-ac', '2', '-ar', '44100', '-f', 's16le', '-acodec', 'pcm_s16le', outputName])
+      if (code !== 0) throw new Error('Não foi possível decodificar este áudio para o formato exigido pelo motor de Stems.')
+      const data = await ffmpeg.readFile(outputName)
+      if (!(data instanceof Uint8Array) || data.length < 4096) throw new Error('O áudio convertido ficou vazio ou é curto demais para separar.')
+      onProgress?.(1)
+      return new Uint8Array(data)
+    } finally {
+      await ffmpeg.deleteFile(inputName).catch(() => undefined)
+      await ffmpeg.deleteFile(outputName).catch(() => undefined)
+    }
+  })
+  conversionQueue = task.catch(() => undefined)
+  return task
+}
