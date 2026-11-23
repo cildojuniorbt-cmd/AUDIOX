@@ -314,3 +314,17 @@
  .library-heading-actions{width:100%;justify-content:space-between}
  .library-refresh{min-height:36px;padding:8px 12px}
 }
+
+
+/* AUDIOX 0.2.6: painel de detalhes da mídia */
+.detail-backdrop{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,8,13,.78);backdrop-filter:blur(8px)}
+.detail-dialog{width:min(620px,100%);max-height:min(82vh,760px);overflow:auto;padding:22px;border:1px solid #254454;border-radius:16px;background:#101c26;box-shadow:0 24px 80px rgba(0,0,0,.45)}
+.detail-heading{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}
+.detail-heading h3{margin:6px 0 0;font-size:20px}
+.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.detail-grid>div{min-width:0;padding:13px;border:1px solid #233946;border-radius:10px;background:#0b151d}
+.detail-grid small{display:block;margin-bottom:7px;color:#83a0ae;font-size:9px;font-weight:800;letter-spacing:.08em}
+.detail-grid strong{display:block;overflow-wrap:anywhere;color:#e4f2f5;font-size:12px;line-height:1.5}
+.detail-note{margin:16px 0;color:#8da4af;font-size:11px;line-height:1.6}
+.detail-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+@media(max-width:560px){.detail-backdrop{padding:12px}.detail-dialog{padding:16px}.detail-grid{grid-template-columns:1fr}.detail-actions{flex-wrap:wrap}.detail-actions button{flex:1}}
