@@ -1,0 +1,28 @@
+name: AUDIOX Stems Browser Lab CI
+on:
+  push:
+    branches: [main]
+    paths:
+      - "prototype/stems-browser/**"
+      - ".github/workflows/stems-browser-lab.yml"
+  pull_request:
+    branches: [main]
+    paths:
+      - "prototype/stems-browser/**"
+      - ".github/workflows/stems-browser-lab.yml"
+jobs:
+  browser-lab-build:
+    name: Type-check and build isolated browser lab
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: prototype/stems-browser
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: prototype/stems-browser/package.json
+      - run: npm install
+      - run: npm run build
