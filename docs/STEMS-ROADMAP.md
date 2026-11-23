@@ -86,11 +86,15 @@ A interface não deve oferecer ação ativa de separação enquanto o motor não
 - Confirmar que os arquivos aparecem na Biblioteca e podem ser baixados individualmente ou em ZIP.
 - Só então habilitar o fluxo de Stems no Downloader.
 
-## Etapas
+## Etapas atualizadas (prioridade mobile-first)
 
-1. Especificação e contrato do motor. **Concluída**
-2. Matriz de avaliação de motores, checkpoints e licenças. **Em andamento**
-3. Sidecar local para Windows, diagnóstico e testes de modelo.
-4. Integração com a interface Downloader e exportação WAV/MP3.
-5. Validação em macOS Apple Silicon.
-6. Avaliação de serviço remoto para PWA/iPhone, somente se houver orçamento e consentimento.
+1. Especificação e contrato do motor local. **Concluída**
+2. Matriz de modelos, checkpoints e licenças. **Em andamento**
+3. Motor ONNX Runtime Web em Web Worker para PWA, com WebGPU quando disponível e WASM CPU como fallback.
+4. Validação no Safari do iPhone, inclusive armazenamento persistente, memória e retomada após suspensão.
+5. Validação no Chrome Android, com WebGPU e fallback WASM.
+6. Integração Biblioteca → Stems e Downloader → Stems, com processamento local e exportação WAV/MP3.
+7. Se necessário, runtimes nativos iOS (Core ML) e Android (ExecuTorch/Vulkan ou ONNX Runtime Mobile).
+8. Windows e macOS somente depois da entrega mobile/PWA.
+
+Não usar serviço remoto como requisito. Não enviar áudio para nuvem sem consentimento explícito.
