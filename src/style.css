@@ -335,3 +335,6 @@
 .backup-warning-dialog>p strong{color:#e9f8fb}
 .backup-warning-dialog .detail-actions{margin-top:22px}
 @media(max-width:560px){.backup-warning-dialog .detail-actions{flex-direction:column-reverse}.backup-warning-dialog .detail-actions button{width:100%;min-height:42px}}
+
+
+/* AUDIOX 0.2.8: feedback de progresso da importação */
