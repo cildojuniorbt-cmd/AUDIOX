@@ -119,7 +119,7 @@ async function runConversion(
 export function convertMedia(
   file: File,
   format: string,
-  options: { bitrate: string; onProgress: (value: number) => void; onLog: (message: string) => void }
+  options: { bitrate: string; peakProtection: boolean; onProgress: (value: number) => void; onLog: (message: string) => void }
 ) {
   // FFmpeg.wasm uses a shared virtual filesystem; serialize jobs to avoid file and state collisions.
   const task = conversionQueue.then(() => runConversion(file, format, options))
