@@ -86,7 +86,10 @@ async function runConversion(
     const args = ['-y', '-i', inputName]
     if (AUDIO_FORMATS.has(format)) {
       args.push('-vn')
-      if (format === 'mp3') args.push('-b:a', `${options.bitrate}k`)
+      if (format === 'mp3') {
+        // A very gentle peak ceiling helps reduce encoder-induced overs on MP3 without normalizing or compressing the whole mix.
+        args.push('-af', 'alimiter=limit=0.98:attack=5:release=50:level=0', '-b:a', `${options.bitrate}k`)
+      }
     }
     if (['mp4', 'mov', 'm4v'].includes(format)) args.push('-movflags', '+faststart')
     args.push(outputName)
