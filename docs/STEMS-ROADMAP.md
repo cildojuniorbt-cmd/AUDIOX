@@ -47,8 +47,9 @@ O FFmpeg.wasm atual não é um motor de separação por IA e não deve ser apres
 
 ## Avaliação técnica do motor
 
-- Demucs/HTDemucs oferece um ponto de partida conhecido para quatro stems e suporte documentado a WAV e MP3. O projeto original informa que o desenvolvimento está em ritmo reduzido, portanto deve ser encapsulado atrás de uma interface substituível.
-- BS-RoFormer e variantes recentes devem ser avaliados em testes comparativos, mas o uso de cada checkpoint depende de licença explícita dos pesos, não apenas da licença do código. Não distribuir pesos com termos ausentes ou ambíguos.
+- Demucs no repositório original facebookresearch foi arquivado em 1º de janeiro de 2025. O código declara MIT, mas a licença do código não deve ser tratada como autorização automática para redistribuir pesos. A licença/proveniência dos pesos deve ser verificada separadamente antes de qualquer distribuição comercial.
+- O repositório lucidrains/BS-RoFormer declara MIT para a implementação. Isso também não concede automaticamente direitos sobre checkpoints de terceiros. Há checkpoints públicos com licença ausente, desconhecida ou não comercial; esses pesos não serão empacotados no AUDIOX sem autorização clara.
+- Avaliar modelos e pesos por separado. Registrar URL de origem, hash, autor, licença do código, licença do checkpoint, uso comercial permitido e obrigações de atribuição.
 - A decisão final de modelo deve considerar qualidade auditiva, artefatos, consumo de VRAM/RAM, tempo de processamento, tamanho do download, compatibilidade Windows/macOS e direitos de redistribuição.
 
 ## Contrato funcional do motor
@@ -87,8 +88,9 @@ A interface não deve oferecer ação ativa de separação enquanto o motor não
 
 ## Etapas
 
-1. Especificação e seleção responsável do motor. **Concluída**
-2. Sidecar local para Windows, diagnóstico e testes de modelo.
-3. Integração com a interface Downloader e exportação WAV/MP3.
-4. Validação em macOS Apple Silicon.
-5. Avaliação de serviço remoto para PWA/iPhone, somente se houver orçamento e consentimento.
+1. Especificação e contrato do motor. **Concluída**
+2. Matriz de avaliação de motores, checkpoints e licenças. **Em andamento**
+3. Sidecar local para Windows, diagnóstico e testes de modelo.
+4. Integração com a interface Downloader e exportação WAV/MP3.
+5. Validação em macOS Apple Silicon.
+6. Avaliação de serviço remoto para PWA/iPhone, somente se houver orçamento e consentimento.
