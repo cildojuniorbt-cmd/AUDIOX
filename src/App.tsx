@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useRegisterSW } from 'virtual:pwa-register/react'
-import { AudioWaveform, Download, RefreshCw, Library, Settings, UploadCloud, FileVideo, Music2, Zap, ShieldCheck, X, CheckCircle2, LoaderCircle, Play, RotateCcw } from 'lucide-react'
+import { AudioWaveform, Download, RefreshCw, Library, Settings, UploadCloud, FileVideo, Music2, Zap, ShieldCheck, X, CheckCircle2, LoaderCircle, Play, RotateCcw, Info } from 'lucide-react'
 import { convertMedia, inspectEncoders } from './lib/ffmpeg'
 import { clearOutputs, deleteOutput, getOutput, getOutputs, saveOutput, type SavedOutput } from './lib/library'
 type Mode = 'converter' | 'downloader' | 'library' | 'settings'
