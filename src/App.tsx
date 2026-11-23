@@ -10,8 +10,8 @@ const audioFormats=['mp3','wav','flac','m4a','aac','ogg','opus','wma','aiff','al
 const videoFormats=['mp4','mkv','mov','avi','webm','wmv','flv','mpeg','mpg','m4v','3gp','ts','mts','m2ts','vob','ogv','mxf','asf','dv','gif']
 const isAudio=(file:File)=>file.type.startsWith('audio/')||audioFormats.includes(file.name.split('.').pop()?.toLowerCase()||'')
 const formatSize=(size:number)=>size>=1024**3?`${(size/1024**3).toFixed(2)} GB`:`${(size/1024**2).toFixed(1)} MB`
-export default function formatMediaDuration(seconds:number){const hours=Math.floor(seconds/3600);const minutes=Math.floor((seconds%3600)/60);const secs=Math.floor(seconds%60);return hours?`${hours}:${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')}`:`${minutes}:${String(secs).padStart(2,'0')}`}
-function App(){
+function formatMediaDuration(seconds:number){const hours=Math.floor(seconds/3600);const minutes=Math.floor((seconds%3600)/60);const secs=Math.floor(seconds%60);return hours?`${hours}:${String(minutes).padStart(2,'0')}:${String(secs).padStart(2,'0')}`:`${minutes}:${String(secs).padStart(2,'0')}`}
+export default function App(){
  const { needRefresh: [needRefresh, setNeedRefresh], updateServiceWorker } = useRegisterSW({
   immediate: true,
   onRegisteredSW(_swUrl, registration) {
