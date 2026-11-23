@@ -19,7 +19,7 @@ AUDIOX is a cross-platform audio and video workspace with one shared React + Typ
 
 ## AI stems roadmap
 
-The integrated **Download + Stems** workflow is specified in [docs/STEMS-ROADMAP.md](docs/STEMS-ROADMAP.md). The first target is local desktop separation into vocals, drums, bass and other instruments, with WAV or MP3 export. It is not enabled yet: the AI engine, desktop sidecar and platform tests must be completed before the UI offers it as a working action. Web/PWA processing will require a separately disclosed remote service or another validated browser-compatible engine.
+The integrated **Download + Stems** workflow is specified in [docs/STEMS-ROADMAP.md](docs/STEMS-ROADMAP.md), with the local process protocol in [docs/STEMS-WORKER-CONTRACT.md](docs/STEMS-WORKER-CONTRACT.md). The first target is local desktop separation into vocals, drums, bass and other instruments, with WAV or MP3 export. It is not enabled yet: the AI engine, approved model weights, desktop sidecar and platform tests must be completed before the UI offers it as a working action. Web/PWA processing will require a separately disclosed remote service or another validated browser-compatible engine.
 
 ## Public web version
 
