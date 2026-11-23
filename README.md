@@ -27,7 +27,10 @@ The first model target is four stems: vocals, drums, bass and other instruments,
 
 No audio may be uploaded to a remote service as a hidden fallback. Model downloads require explicit user action, a displayed size estimate, integrity verification and documented permission for commercial use and redistribution. Model code and weights must be reviewed separately.
 
+An isolated browser lab now lives in [`prototype/stems-browser`](prototype/stems-browser/README.md). It uses SCNet INT8 through ONNX Runtime Web in a Worker, limits the first test to 8 seconds, and does not change production dependencies or ship model weights. This is a technical spike only; SCNet's training-data rights remain unresolved for commercial use.
+
 See:
+- [Browser prototype lab](prototype/stems-browser/README.md)
 - [Mobile-first implementation plan](docs/STEMS-MOBILE-FIRST-PLAN.md)
 - [Engine and license decision](docs/STEMS-ENGINE-DECISION.md)
 - [Worker contract](docs/STEMS-WORKER-CONTRACT.md)
