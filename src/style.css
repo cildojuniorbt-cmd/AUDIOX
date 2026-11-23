@@ -353,3 +353,14 @@
 .stem-result span{color:#dceaf0;font-weight:700}
 .stem-result a{color:#59d6a8;text-decoration:none;font-weight:700}
 @media(max-width:560px){.stem-engine-status,.stem-result{align-items:flex-start;flex-direction:column}.stem-engine-status button{width:100%}}
+
+/* Downloader source recognition */
+.media-source-info{display:flex;flex-direction:column;gap:4px;margin-top:10px;padding:11px 13px;border:1px solid #254557;border-radius:9px;background:#0b1d29;color:#91a9b6;font-size:11px;line-height:1.55}
+.media-source-info strong{color:#dceaf0;font-size:12px}
+.media-source-info.supported-direct{border-color:#28634f}
+.media-source-info.supported-direct strong{color:#59d6a8}
+.media-source-info.official-integration-required{border-color:#6b5730}
+.media-source-info.official-integration-required strong{color:#e9c36c}
+.media-source-info.streaming-not-enabled{border-color:#6b5730}
+.media-source-info.streaming-not-enabled strong{color:#e9c36c}
+.media-source-info.unknown strong{color:#62d8e5}
