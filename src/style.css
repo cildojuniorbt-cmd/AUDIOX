@@ -364,3 +364,24 @@
 .media-source-info.streaming-not-enabled{border-color:#6b5730}
 .media-source-info.streaming-not-enabled strong{color:#e9c36c}
 .media-source-info.unknown strong{color:#62d8e5}
+
+/* AUDIOX Stems workspace */
+.stems-workspace{display:flex;flex-direction:column;gap:20px}
+.stems-drop{min-height:190px;border:1px dashed #326174;border-radius:14px;background:#0c2230;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#55d5e3;cursor:pointer;text-align:center;padding:22px}
+.stems-drop input{display:none}
+.stems-drop b{font-size:14px;color:#dceaf0;overflow-wrap:anywhere}
+.stems-drop small,.stems-format small,.stems-disabled-hint{font-size:11px;color:#8197a4}
+.stems-drop span{display:inline-flex;margin-top:5px;padding:9px 16px;border:1px solid #286172;border-radius:8px;color:#59d6e5;font-size:11px;font-weight:700}
+.stems-parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stems-parts>div{display:flex;align-items:center;gap:9px;min-width:0;padding:15px 12px;border:1px solid #1c3d4e;border-radius:11px;background:#0d2230;color:#dceaf0;font-size:12px}
+.stems-parts svg{width:20px;height:20px;flex:none;color:#55d8e6}
+.stems-format{display:flex;flex-direction:column;gap:9px}
+.stems-format label{font-size:10px;font-weight:700;letter-spacing:1.2px;color:#6bdbe5}
+.stems-format select{width:100%;background:#102534;color:#d9e7ee;border:1px solid #254354;padding:13px 14px;border-radius:9px}
+.stems-cloud-note{display:flex;gap:12px;padding:15px;border:1px solid #66532e;border-radius:11px;background:#241f16;color:#d6c69d}
+.stems-cloud-note>svg{flex:none;color:#e8c66e}
+.stems-cloud-note b{font-size:12px;color:#f0d58f}
+.stems-cloud-note p{margin:6px 0 0;font-size:11px;line-height:1.6;color:#c2b48f}
+.stems-run{width:100%;min-height:48px}
+.stems-disabled-hint{display:block;text-align:center;line-height:1.5}
+@media(max-width:760px){.sidebar{grid-template-columns:repeat(5,minmax(72px,1fr));overflow-x:auto;scrollbar-width:thin}.sidebar>.nav,.sidebar-bottom>.nav{flex-direction:column;gap:4px;min-height:58px;padding:7px 3px;font-size:10px}.stems-parts{grid-template-columns:repeat(2,minmax(0,1fr))}.stems-workspace{padding:16px}}
