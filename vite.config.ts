@@ -18,7 +18,7 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: [],
       manifest: {
-        name: 'AUDIOX | A NEXUS Product',
+        name: 'AUDIOX | Nexus Works Digital',
         short_name: 'AUDIOX',
         description: 'Conversão profissional de áudio e vídeo.',
         theme_color: '#08131f',
