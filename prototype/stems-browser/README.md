@@ -39,6 +39,12 @@ npm run build
 npm run preview
 ```
 
+## Integração de inferência validada no código
+
+O laboratório chama a API pública do pacote `@audio/neural-separate` com o formato documentado `{ channelData, sampleRate }`, seleciona o preset `scnet` e força `device: 'wasm'`. O pacote usa `onnxruntime-web` no navegador e busca os pesos SCNet hospedados pelo projeto do modelo; o arquivo de pesos não está incluído no bundle do AUDIOX. O callback `progress` acompanha os segmentos de inferência, não o percentual do download inicial do modelo, por isso a interface não inventa uma porcentagem para essa etapa.
+
+O pacote contém importações dinâmicas para caminhos Node.js e navegador. O Vite pode emitir avisos sobre módulos `node:*` externalizados durante o build; esses caminhos são condicionais e o runtime de navegador seleciona `onnxruntime-web`. A compilação isolada passou no GitHub Actions, mas isso ainda não substitui a execução real do modelo em um navegador físico.
+
 ## Protocolo de teste
 
 1. Comece com um trecho estéreo autorizado de 5 a 8 segundos.
