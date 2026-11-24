@@ -99,10 +99,16 @@ async function runConversion(
       const { aspect, fit, rotation } = options.videoOptions
       const dimensions: Record<string, [number, number]> = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350], '4:3':[1440,1080], '3:4':[1080,1440] }
       const [width,height] = dimensions[aspect] || dimensions['16:9']
-      const rotate = rotation === '90' ? 'transpose=1,' : rotation === '270' ? 'transpose=2,' : rotation === '180' ? 'hflip,vflip,' : ''
-      const scale = fit === 'crop' ? `scale=${width}:${height}:force_original_aspect_ratio=increase,crop=${width}:${height}` : fit === 'contain' ? `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2:color=black` : `split[bg][fg];[bg]scale=${width}:${height}:force_original_aspect_ratio=increase,crop=${width}:${height},boxblur=20:10[blurred];[fg]scale=${width}:${height}:force_original_aspect_ratio=decrease[sharp];[blurred][sharp]overlay=(W-w)/2:(H-h)/2`
-      const filter = fit === 'blur' ? `${rotate} ${scale}` : `${rotate}${scale}`
-      args.push('-vf', filter, '-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23', '-c:a', 'aac', '-b:a', '192k', '-pix_fmt', 'yuv420p')
+      const rotate = rotation === '90' ? 'transpose=1' : rotation === '270' ? 'transpose=2' : rotation === '180' ? 'hflip,vflip' : ''
+      const scale = fit === 'crop' ? `scale=${width}:${height}:force_original_aspect_ratio=increase,crop=${width}:${height}` : fit === 'contain' ? `scale=${width}:${height}:force_original_aspect_ratio=decrease,pad=${width}:${height}:(ow-iw)/2:(oh-ih)/2:color=black` : ''
+      const prefix = rotate ? `${rotate},` : ''
+      if (fit === 'blur') {
+        const graph = `[0:v]${prefix}split[bg][fg];[bg]scale=${width}:${height}:force_original_aspect_ratio=increase,crop=${width}:${height},boxblur=20:10[blurred];[fg]scale=${width}:${height}:force_original_aspect_ratio=decrease[sharp];[blurred][sharp]overlay=(W-w)/2:(H-h)/2[outv]`
+        args.push('-filter_complex', graph, '-map', '[outv]', '-map', '0:a?')
+      } else {
+        args.push('-vf', `${prefix}${scale}`)
+      }
+      args.push('-c:v', 'libx264', '-preset', 'ultrafast', '-crf', '23', '-c:a', 'aac', '-b:a', '192k', '-pix_fmt', 'yuv420p')
       if (['mp4','mov','m4v'].includes(format)) args.push('-movflags', '+faststart')
     } else if (['mp4', 'mov', 'm4v'].includes(format)) args.push('-movflags', '+faststart')
     args.push(outputName)
