@@ -11,7 +11,8 @@ import { detectStemsCapabilities, type StemsCapabilities } from './lib/stems-cap
 import { clearOutputs, deleteOutput, getOutput, getOutputs, saveOutput, type SavedOutput } from './lib/library'
 type Mode = 'converter' | 'downloader' | 'stems' | 'library' | 'settings'
 type HistoryItem = Omit<SavedOutput,'blob'>
-type VideoOptions = { aspect: string; fit: 'blur'|'crop'|'contain'; rotation: '0'|'90'|'180'|'270' };\ntype Job = { id: string; file: File; format: string; bitrate: string; videoOptions: VideoOptions; status: 'queued'|'processing'|'done'|'error'; progress: number; outputUrl?: string; outputName?: string; error?: string }
+type VideoOptions = { aspect: string; fit: 'blur'|'crop'|'contain'; rotation: '0'|'90'|'180'|'270' };
+type Job = { id: string; file: File; format: string; bitrate: string; videoOptions: VideoOptions; status: 'queued'|'processing'|'done'|'error'; progress: number; outputUrl?: string; outputName?: string; error?: string }
 const audioFormats=['mp3','wav','flac','m4a','aac','ogg','opus','wma','aiff','alac','ape','ac3','dts','amr','mp2']
 const videoFormats=['mp4','mkv','mov','avi','webm','wmv','flv','mpeg','mpg','m4v','3gp','ts','mts','m2ts','vob','ogv','mxf','asf','dv','gif']
 const isAudio=(file:File)=>file.type.startsWith('audio/')||audioFormats.includes(file.name.split('.').pop()?.toLowerCase()||'')
